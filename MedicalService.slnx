@@ -1,0 +1,21 @@
+﻿<Solution>
+  <Folder Name="/common/" />
+  <Folder Name="/src/" />
+  <Folder Name="/src/Application/">
+    <Project Path="src\Application\Abstractions\Abstractions.csproj" Type="Classic C#" />
+    <Project Path="src\Application\Application\Application.csproj" Type="Classic C#" />
+    <Project Path="src\Application\Contracts\Contracts.csproj" Type="Classic C#" />
+    <Project Path="src\Application\Models\Models.csproj" Type="Classic C#" />
+    <Project Path="src\Host\Host.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src\Infrastructure\Persistence\Persistence.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Presentation/">
+    <Project Path="src\Presentation\AmsGrpc\AmsGrpc.csproj" Type="Classic C#" />
+    <Project Path="src\Presentation\AmsKafka\AmsKafka.csproj" Type="Classic C#" />
+    <Project Path="src\Presentation\GatewayGrpc\GatewayGrpc.csproj" Type="Classic C#" />
+    <Project Path="src\Presentation\MdsKafka\MdsKafka.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>

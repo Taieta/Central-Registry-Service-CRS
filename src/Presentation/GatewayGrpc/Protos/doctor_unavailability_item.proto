@@ -1,0 +1,21 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CentralRegistry.Grpc";
+
+import "google/protobuf/timestamp.proto";
+
+// service
+service DoctorUnavailabilityService {
+  rpc CreateUnavailabilityItem (CreateUnavailabilityItemRequest) returns (CreateUnavailabilityItemResponse);
+}
+
+// requests and responses
+message CreateUnavailabilityItemRequest {
+  int64 doctor_id = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+  string reason = 4;
+}
+
+message CreateUnavailabilityItemResponse {
+}

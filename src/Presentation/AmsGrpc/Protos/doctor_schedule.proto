@@ -1,0 +1,72 @@
+﻿syntax = "proto3";
+package doctor.schedule;
+import "google/protobuf/timestamp.proto";
+option csharp_namespace = "Doctor.Schedule";
+
+enum DoctorSpecialty {
+  DOCTOR_SPECIALTY_UNSPECIFIED = 0;
+  DOCTOR_SPECIALTY_THERAPIST = 1;
+  DOCTOR_SPECIALTY_SURGEON = 2;
+  DOCTOR_SPECIALTY_PEDIATRICIAN = 3;
+  DOCTOR_SPECIALTY_CARDIOLOGIST = 4;
+}
+enum Weekday {
+  WEEKDAY_UNSPECIFIED = 0;
+  WEEKDAY_MONDAY = 1;
+  WEEKDAY_TUESDAY = 2;
+  WEEKDAY_WEDNESDAY = 3;
+  WEEKDAY_THURSDAY = 4;
+  WEEKDAY_FRIDAY = 5;
+  WEEKDAY_SATURDAY = 6;
+  WEEKDAY_SUNDAY = 7;
+}
+
+message ScheduleItem {
+  int64 doctor_id = 1;
+  google.protobuf.Timestamp start_time = 2;
+  google.protobuf.Timestamp end_time = 3;
+  Weekday weekday = 4;
+}
+message UnavailabilityItem {
+  int64 doctor_id = 1;
+  google.protobuf.Timestamp start_date = 2;
+  google.protobuf.Timestamp end_date = 3;
+}
+
+message SearchScheduleBySpecializationRequest {
+  DoctorSpecialty specialization = 1;
+  Weekday weekday = 2;
+}
+message SearchScheduleBySpecializationResponse {
+  repeated ScheduleItem schedule_items = 1;
+}
+message SearchUnavailabilityBySpecializationRequest {
+  DoctorSpecialty specialization = 1;
+}
+message SearchUnavailabilityBySpecializationResponse {
+  repeated UnavailabilityItem unavailability_items = 1;
+}
+message SearchScheduleByIdRequest {
+  int64 doctor_id = 1;
+}
+message SearchScheduleByIdResponse {
+  repeated ScheduleItem schedule_items = 1;
+}
+message SearchUnavailabilityByIdRequest {
+  int64 doctor_id = 1;
+  google.protobuf.Timestamp from_date = 2;
+  google.protobuf.Timestamp to_date = 3;
+}
+message SearchUnavailabilityByIdResponse {
+  repeated UnavailabilityItem unavailability_items = 1;
+}
+service DoctorScheduleService {
+  rpc SearchScheduleBySpecialization(SearchScheduleBySpecializationRequest)
+      returns (SearchScheduleBySpecializationResponse);
+  rpc SearchUnavailabilityBySpecialization(SearchUnavailabilityBySpecializationRequest)
+      returns (SearchUnavailabilityBySpecializationResponse);
+  rpc SearchScheduleById(SearchScheduleByIdRequest)
+      returns (SearchScheduleByIdResponse);
+  rpc SearchUnavailabilityById(SearchUnavailabilityByIdRequest)
+      returns (SearchUnavailabilityByIdResponse);
+}

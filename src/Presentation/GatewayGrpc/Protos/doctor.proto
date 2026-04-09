@@ -1,0 +1,77 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CentralRegistry.Grpc";
+
+// enums
+enum DoctorSpecialtyModel {
+  DOCTOR_SPECIALTY_UNSPECIFIED = 0;
+  DOCTOR_SPECIALTY_THERAPIST = 1;
+  DOCTOR_SPECIALTY_SURGEON = 2;
+  DOCTOR_SPECIALTY_PEDIATRICIAN = 3;
+  DOCTOR_SPECIALTY_CARDIOLOGIST = 4;
+}
+
+// models
+message DoctorModel {
+  int64 id = 1;
+  string name = 2;
+  DoctorSpecialtyModel specialty = 3;
+  string license = 4;
+  string phone = 5;
+  string email = 6;
+  bool is_active = 7;
+}
+
+// service
+service DoctorService {
+  rpc CreateDoctor (CreateDoctorRequest) returns (CreateDoctorResponse);
+
+  rpc GetDoctorById (GetDoctorByIdRequest) returns (GetDoctorByIdResponse);
+
+  rpc UpdateDoctor (UpdateDoctorRequest) returns (UpdateDoctorResponse);
+
+  rpc DeleteDoctor (DeleteDoctorRequest) returns (DeleteDoctorResponse);
+}
+
+// requests and responses
+message CreateDoctorRequest {
+  string name = 1;
+  DoctorSpecialtyModel specialty = 2;
+  string license = 3;
+  string phone = 4;
+  string email = 5;
+  bool is_active = 6;
+}
+
+message CreateDoctorResponse {
+  DoctorModel doctor = 1;
+}
+
+message GetDoctorByIdRequest {
+  int64 id = 1;
+}
+
+message GetDoctorByIdResponse {
+  DoctorModel doctor = 1;
+}
+
+message UpdateDoctorRequest {
+  int64 id = 1;
+  string name = 2;
+  DoctorSpecialtyModel specialty = 3;
+  string license = 4;
+  string phone = 5;
+  string email = 6;
+  bool is_active = 7;
+}
+
+message UpdateDoctorResponse {
+  DoctorModel doctor = 1;
+}
+
+message DeleteDoctorRequest {
+  int64 id = 1;
+}
+
+message DeleteDoctorResponse {
+}

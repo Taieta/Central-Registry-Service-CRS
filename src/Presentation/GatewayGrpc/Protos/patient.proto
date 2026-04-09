@@ -1,0 +1,77 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CentralRegistry.Grpc";
+
+import "google/protobuf/timestamp.proto";
+
+// enums
+enum BloodTypeModel {
+  BLOOD_TYPE_UNSPECIFIED = 0;
+  BLOOD_TYPE_A_POS = 1;
+  BLOOD_TYPE_A_NEG = 2;
+  BLOOD_TYPE_B_POS = 3;
+  BLOOD_TYPE_B_NEG = 4;
+  BLOOD_TYPE_AB_POS = 5;
+  BLOOD_TYPE_AB_NEG = 6;
+  BLOOD_TYPE_O_POS = 7;
+  BLOOD_TYPE_O_NEG = 8;
+}
+
+// models
+message PatientModel {
+  int64 id = 1;
+  string name = 2;
+  bool is_male = 3;
+  string phone = 4;
+  string email = 5;
+  google.protobuf.Timestamp birth_date = 6;
+  BloodTypeModel blood_type = 7;
+  string insurance = 8;
+}
+
+// service
+service PatientService {
+  rpc CreatePatient (CreatePatientRequest) returns (CreatePatientResponse);
+
+  rpc GetPatientById (GetPatientByIdRequest) returns (GetPatientByIdResponse);
+
+  rpc UpdatePatient (UpdatePatientRequest) returns (UpdatePatientResponse);
+}
+
+// requests and responses
+message CreatePatientRequest {
+  string name = 1;
+  bool is_male = 2;
+  string phone = 3;
+  string email = 4;
+  google.protobuf.Timestamp birth_date = 5;
+  BloodTypeModel blood_type = 6;
+  string insurance = 7;
+}
+
+message CreatePatientResponse {
+  PatientModel patient = 1;
+}
+
+message GetPatientByIdRequest {
+  int64 id = 1;
+}
+
+message GetPatientByIdResponse {
+  PatientModel patient = 1;
+}
+
+message UpdatePatientRequest {
+  int64 id = 1;
+  string name = 2;
+  bool is_male = 3;
+  string phone = 4;
+  string email = 5;
+  google.protobuf.Timestamp birth_date = 6;
+  BloodTypeModel blood_type = 7;
+  string insurance = 8;
+}
+
+message UpdatePatientResponse {
+  PatientModel patient = 1;
+}

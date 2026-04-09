@@ -1,0 +1,65 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CentralRegistry.Grpc";
+
+import "google/protobuf/timestamp.proto";
+
+// enums
+enum WeekdayModel {
+  WEEKDAY_UNSPECIFIED = 0;
+  MONDAY = 1;
+  TUESDAY = 2;
+  WEDNESDAY = 3;
+  THURSDAY = 4;
+  FRIDAY = 5;
+  SATURDAY = 6;
+  SUNDAY = 7;
+}
+
+// models
+message DoctorScheduleItemModel {
+  int64 id = 1;
+  int64 doctor_id = 2;
+  WeekdayModel weekday = 3;
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;
+}
+
+// service
+service DoctorScheduleService {
+  rpc CreateScheduleItem (CreateScheduleItemRequest) returns (CreateScheduleItemResponse);
+
+  rpc GetScheduleItemById (GetScheduleItemByIdRequest) returns (GetScheduleItemByIdResponse);
+}
+
+// requests and responses
+message CreateScheduleItemRequest {
+  int64 doctor_id = 1;
+  WeekdayModel weekday = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4;
+}
+
+message CreateScheduleItemResponse {
+  DoctorScheduleItemModel item = 1;
+}
+
+message GetScheduleItemByIdRequest {
+  int64 id = 1;
+}
+
+message GetScheduleItemByIdResponse {
+  DoctorScheduleItemModel item = 1;
+}
+
+message UpdateScheduleItemRequest {
+  int64 id = 1;
+  int64 doctor_id = 2;
+  WeekdayModel weekday = 3;
+  google.protobuf.Timestamp start_time = 4;
+  google.protobuf.Timestamp end_time = 5;
+}
+
+message UpdateScheduleItemResponse {
+  DoctorScheduleItemModel item = 1;
+}

@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+option csharp_namespace = "Mds.Kafka.Events.Contracts";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message PatientCreationKey {
+  int64 patient_id = 1;
+}
+message PatientCreationValue {
+  oneof event {
+    PatientCreated patient_created = 1;
+  }
+  message PatientCreated {
+    int64 patient_id = 1;
+    google.protobuf.Timestamp creation_time = 2;
+  }
+}

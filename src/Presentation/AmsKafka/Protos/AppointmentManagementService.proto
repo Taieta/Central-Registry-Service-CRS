@@ -1,0 +1,23 @@
+﻿syntax = "proto3";
+package crs.events;
+option csharp_namespace = "Crs.Events.Kafka.Contracts";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+message DoctorEventKey {
+  int64 doctor_id = 1;
+}
+message DoctorEventValue {
+  oneof event {
+    DoctorUnavailable doctor_unavailable = 1;
+    DoctorFired doctor_fired = 2;
+  }
+  message DoctorUnavailable {
+    int64 doctor_id = 1;
+    google.protobuf.Timestamp start_date = 2;
+    google.protobuf.Timestamp end_date = 3;
+  }
+  message DoctorFired {
+    int64 doctor_id = 1;
+    google.protobuf.Timestamp fired_date = 2;
+  }
+}
